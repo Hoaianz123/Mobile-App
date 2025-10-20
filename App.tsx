@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, FlatList, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native';
 
 
 interface ITodo{
@@ -17,9 +17,20 @@ export default function App() {
 function randomInteger(min : number, max: number){
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
 const handleAddTodo = () => {
   if(!todo ) {
-    alert("empty todo")
+    Alert.alert( "Lỗi input todo",  "Todo không được để trống", 
+      [
+      // {
+      //   text: 'Huy',
+      //   onPress: () => console.log('Cancel Pressed'),
+      //   style: 'cancel',
+      // },
+      {text: 'ô vãi cả dái', onPress: () => console.log('OK Pressed')},
+    ]
+    )
 
   return;
 }
@@ -35,6 +46,7 @@ const deleteTodo = (id: number) => {
 }
 
   return (
+    <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
     <View style={styles.container}>
       {/* {header } */}
               <Text style={styles.header}>Xin Chao Hoai An</Text>
@@ -73,6 +85,7 @@ const deleteTodo = (id: number) => {
               </View>
 
             </View>
+            </TouchableNativeFeedback>
         );
       }
     
